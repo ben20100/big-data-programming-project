@@ -1,0 +1,12 @@
+# 데이터 파일 제외 (용량이 큰 원본 데이터 방지)
+data/*.csv
+data/*.json
+data/*.parquet
+
+# 파이썬 가상환경 및 캐시 제외
+__pycache__/
+venv/
+.env
+
+# 운영체제 생성 파일
+.DS_Store
