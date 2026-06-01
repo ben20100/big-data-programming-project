@@ -189,8 +189,12 @@ ml_df = ml_df.withColumn(
 # 12. 머신러닝 최종 데이터셋 생성
 # ============================================================
 
-ml_export = ml_df.select(
+ml_export_v2 = ml_df.select(
     "league_id",
+    "home_team_api_id",
+    "away_team_api_id",
+    "home_team_goal",
+    "away_team_goal",
     "win",
     "shoton_diff",
     "corner_diff",
@@ -200,10 +204,6 @@ ml_export = ml_df.select(
     col("possession_diff").isNotNull()
 )
 
-# ============================================================
-# 13. CSV 저장
-# ============================================================
-
-ml_export.coalesce(1).write.mode("overwrite") \
-.option("header", "true") \
-.csv("/user/maria_dev/football/ml_features_league")
+ml_export_v2.coalesce(1).write.mode("overwrite") \
+.option("header","true") \
+.csv("/user/maria_dev/football/ml_features_v2")
