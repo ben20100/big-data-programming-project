@@ -1,11 +1,22 @@
-# 리그 정확도 시각화
+# ============================================================
+# Visualization
+# European Soccer Match Analysis Project
+# ============================================================
+
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 import plotly.express as px
+import plotly.graph_objects as go
+
+# ============================================================
+# Figure 1. League-wise Model Accuracy
+# ============================================================
 
 acc_df = pd.DataFrame({
-    "League": ["EPL","EPL","Bundesliga","Bundesliga","La Liga","La Liga"],
-    "Model": ["Logistic Regression","Random Forest"]*3,
-    "Accuracy": [73.84,72.73,69.82,69.82,77.95,75.20]
+    "League":["EPL","EPL","Bundesliga","Bundesliga","La Liga","La Liga"],
+    "Model":["Logistic Regression","Random Forest"]*3,
+    "Accuracy":[73.84,72.73,69.82,69.82,77.95,75.20]
 })
 
 fig = px.bar(
@@ -18,17 +29,21 @@ fig = px.bar(
     title="Model Accuracy by League"
 )
 
-fig.update_traces(texttemplate='%{text:.1f}%')
-fig.update_layout(yaxis_title="Accuracy (%)")
+fig.update_traces(
+    texttemplate="%{text:.1f}%"
+)
+
+fig.update_layout(
+    yaxis_title="Accuracy (%)"
+)
 
 fig.show()
 
-#로지스틱 회귀 계수 히트맵
-import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
+# ============================================================
+# Figure 2. Logistic Regression Coefficient Heatmap
+# ============================================================
 
-coef_df=pd.DataFrame({
+coef_df = pd.DataFrame({
     "shoton_diff":[-0.057,-0.004,0.031],
     "corner_diff":[-0.067,-0.013,-0.049],
     "foul_diff":[-0.012,-0.045,-0.006],
@@ -36,7 +51,7 @@ coef_df=pd.DataFrame({
     "home_win_rate":[1.625,1.897,1.811],
     "away_win_rate":[-1.620,-1.631,-1.661],
     "win_rate_diff":[3.728,3.527,3.472]
-},index=["EPL","Bundesliga","La Liga"])
+}, index=["EPL","Bundesliga","La Liga"])
 
 plt.figure(figsize=(10,5))
 
@@ -49,14 +64,15 @@ sns.heatmap(
 )
 
 plt.title("Logistic Regression Coefficients by League")
+
 plt.tight_layout()
 plt.show()
 
-#랜덤 포레스트 중요도 (3개 리그 평균)
-import pandas as pd
-import plotly.express as px
+# ============================================================
+# Figure 3. Random Forest Feature Importance
+# ============================================================
 
-rf_df=pd.DataFrame({
+rf_df = pd.DataFrame({
     "Feature":[
         "ShotOn",
         "Corner",
@@ -77,12 +93,12 @@ rf_df=pd.DataFrame({
     ]
 })
 
-rf_df=rf_df.sort_values(
+rf_df = rf_df.sort_values(
     by="Importance",
     ascending=True
 )
 
-fig=px.bar(
+fig = px.bar(
     rf_df,
     x="Importance",
     y="Feature",
@@ -95,30 +111,31 @@ fig.update_traces(
     texttemplate="%{text:.3f}",
     textposition="outside"
 )
+
 fig.update_layout(
     xaxis_range=[0,0.38]
 )
 
 fig.show()
 
-#Home vs Away Win Rate 영향력 비교
-import pandas as pd
-import plotly.graph_objects as go
+# ============================================================
+# Figure 4. Home vs Away Win Rate Impact
+# ============================================================
 
-rate_df=pd.DataFrame({
+rate_df = pd.DataFrame({
     "League":["EPL","Bundesliga","La Liga"],
     "Home":[1.625,1.897,1.811],
     "Away":[1.620,1.631,1.661]
 })
 
-fig=go.Figure()
+fig = go.Figure()
 
-for _,row in rate_df.iterrows():
+for _, row in rate_df.iterrows():
 
     fig.add_trace(
         go.Scatter(
-            x=[row["League"],row["League"]],
-            y=[row["Away"],row["Home"]],
+            x=[row["League"], row["League"]],
+            y=[row["Away"], row["Home"]],
             mode="lines",
             showlegend=False
         )
@@ -131,7 +148,8 @@ fig.add_trace(
         mode="markers+text",
         name="Home Win Rate",
         text=rate_df["Home"].round(3),
-        textposition="top center"
+        textposition="top center",
+        marker=dict(size=12,color="blue")
     )
 )
 
@@ -142,7 +160,8 @@ fig.add_trace(
         mode="markers+text",
         name="Away Win Rate",
         text=rate_df["Away"].round(3),
-        textposition="bottom center"
+        textposition="bottom center",
+        marker=dict(size=12,color="red")
     )
 )
 
@@ -153,9 +172,9 @@ fig.update_layout(
 
 fig.show()
 
-#Win Rate Diff 비교
-import pandas as pd
-import plotly.express as px
+# ============================================================
+# Figure 5. Win Rate Difference Coefficient
+# ============================================================
 
 diff_df = pd.DataFrame({
     "League":["EPL","Bundesliga","La Liga"],
@@ -174,6 +193,9 @@ fig.update_yaxes(
     range=[3,3.8]
 )
 
-fig.update_traces(texttemplate='%{text:.3f}')
+fig.update_traces(
+    texttemplate="%{text:.3f}",
+    textposition="outside"
+)
 
 fig.show()
