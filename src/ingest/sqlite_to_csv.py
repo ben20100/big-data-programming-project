@@ -1,4 +1,5 @@
 #데이터 수집 스크립트
+#데이터의 형태가 sqlite로 되어있어서 csv 파일 형식으로 변환함
 
 import sqlite3
 import pandas as pd
