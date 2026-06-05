@@ -1,0 +1,101 @@
+#league 테이블 생성
+
+CREATE TABLE leagues (
+    id STRING,
+    country_id STRING,
+    name STRING
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ',';
+
+#team 테이블 생성
+
+CREATE TABLE teams (
+    id STRING,
+    team_api_id STRING,
+    team_fifa_api_id STRING,
+    team_long_name STRING,
+    team_short_name STRING
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ',';
+
+#matches 테이블 생성
+
+CREATE TABLE matches (
+    id STRING,
+    country_id STRING,
+    league_id STRING,
+    season STRING,
+    stage STRING,
+    match_date STRING,
+    match_api_id STRING,
+    home_team_api_id STRING,
+    away_team_api_id STRING,
+    home_team_goal STRING,
+    away_team_goal STRING
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ',';
+
+match_stats 테이블 생성
+
+CREATE TABLE match_stats (
+    ...
+    goal_stat STRING,
+    shoton STRING,
+    shotoff STRING,
+    foulcommit STRING,
+    card_stat STRING,
+    cross_stat STRING,
+    corner_stat STRING,
+    possession STRING
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ',';
+
+#possession_stats 테이블 생성
+
+CREATE TABLE possession_stats (
+    league_id STRING,
+    season STRING,
+    home_team_api_id STRING,
+    away_team_api_id STRING,
+    home_team_goal STRING,
+    away_team_goal STRING,
+    home_possession STRING,
+    away_possession STRING
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ',';
+
+#analysis_stats 생성
+
+CREATE TABLE analysis_stats (
+    match_api_id STRING,
+    home_goal INT,
+    away_goal INT,
+    shoton INT,
+    shotoff INT,
+    foulcommit INT,
+    corner_stat INT,
+    possession DOUBLE,
+    win INT
+)
+STORED AS ORC;
+
+#analysis_stats_export 생성
+
+CREATE TABLE analysis_stats_export (
+    match_api_id STRING,
+    home_goal INT,
+    away_goal INT,
+    shoton INT,
+    shotoff INT,
+    foulcommit INT,
+    corner_stat INT,
+    possession DOUBLE,
+    win INT
+)
+STORED AS ORC;
+
