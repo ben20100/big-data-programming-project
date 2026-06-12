@@ -1,8 +1,6 @@
 from utils.feature_extraction import *
 
-# ============================================================
 # 7. UDF 생성
-# ============================================================
 
 home_shoton_udf=udf(home_shoton,IntegerType())
 away_shoton_udf=udf(away_shoton,IntegerType())
@@ -16,9 +14,7 @@ away_foul_udf=udf(away_foul,IntegerType())
 home_pos_udf=udf(home_possession,IntegerType())
 away_pos_udf=udf(away_possession,IntegerType())
 
-# ============================================================
 # 8. 통계 컬럼 생성
-# ============================================================
 
 analysis_df=match_df \
 .withColumn(
@@ -54,9 +50,7 @@ analysis_df=match_df \
     away_pos_udf("possession")
 )
 
-# ============================================================
 # 9. 승패 라벨 및 차이값 생성
-# ============================================================
 
 analysis_df=analysis_df \
 .filter(
@@ -91,17 +85,13 @@ analysis_df=analysis_df \
     col("away_possession")
 )
 
-# ============================================================
 # 10. 리그 분리
-# ============================================================
 
 epl_df=analysis_df.filter(col("league_id")==1729)
 bund_df=analysis_df.filter(col("league_id")==7809)
 liga_df=analysis_df.filter(col("league_id")==21518)
 
-# ============================================================
 # 11. 상관계수 분석
-# ============================================================
 
 print("=== EPL ===")
 print("ShotOn :",epl_df.stat.corr("shoton_diff","win"))
