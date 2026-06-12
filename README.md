@@ -67,6 +67,8 @@ Google Drive 업로드
     ↓
 gdown 다운로드
     ↓
+XML 파싱
+    ↓
 HDFS 적재
     ↓
 Hive 테이블 생성
@@ -281,10 +283,25 @@ football-bigdata-project/
 ├── README.md
 ├── data/
 ├── src/
-│   ├── ingest/
-│   ├── hive/
-│   ├── spark/
-│   └── visualization/
+│   ├── analyze
+│   ├── average_comparison.py
+│   ├── correlation_analysis.py
+│   ├── logistic_regression.py
+│   ├── random_forest.py
+│   └── visualization.py
+│
+├── ingest
+│   ├── sqlite_to_csv.py
+│   ├── create_tables.sql
+│   └── create_analysis_stats.sql
+│
+├── pipeline
+│   ├── process.py
+│   ├── create_ml_features.py
+│   └── create_winrate_features.py
+│
+└── utils
+    └── feature_extraction.py
 │
 ├── results/
 └── report/
@@ -311,8 +328,6 @@ Big Data Programming Project
 ---
 
 # 🤖 AI 활용 내역
-
-본 프로젝트에서는 ChatGPT를 활용하여 다음 작업을 수행하였습니다.
 
 - XML 파싱 방법 학습
 - 코드 오류 해결
