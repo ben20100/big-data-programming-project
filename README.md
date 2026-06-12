@@ -345,13 +345,48 @@ python src/analyze/random_forest.py
 ### 7. 시각화
 
 python src/analyze/visualization.py
+
 ---
+# commit 내역
 
-# 👨‍💻 개발자
+### 1. 프로젝트 초기 설정 (2026-05-09)
+- GitHub Repository 생성
+- 데이터 스키마 정의
+- 데이터 수집 스크립트 작성
+- Spark / MapReduce 처리 코드 구성
+- Docker Compose 환경 설정
+- .gitignore 설정
+- README 초안 작성
 
-전형빈
+### 2. 데이터 수집 및 적재 (2026-06-04 ~ 2026-06-06)
+- SQLite 데이터베이스 추출
+- CSV 변환 파이프라인 구현
+- 리그, 팀, 경기, 통계 테이블 생성
+- analysis_stats 분석 테이블 생성
 
-Big Data Programming Project
+### 3. Feature Engineering (2026-06-01)
+- 머신러닝용 Feature 생성
+- 홈/원정 승률 Feature 생성
+- XML 기반 경기 통계 Feature 추출
+
+### 4. 머신러닝 모델 구현 (2026-06-01)
+- Logistic Regression 모델 구현
+- League별 Logistic Regression 분석
+- Random Forest 모델 구현
+- League별 Random Forest 분석
+
+### 5. 데이터 분석 및 시각화 (2026-06-01 ~ 2026-06-12)
+- 경기 지표 상관관계 분석
+- 리그별 평균 비교 분석
+- 승패 영향 요인 분석
+- 리그별 성능 시각화
+- 분석 코드 리팩토링 및 최적화
+
+### 6. 문서화 및 프로젝트 정리 (2026-05-25 ~ 2026-06-12)
+- README 작성 및 보완
+- 프로젝트 구조 정리
+- 실행 가이드 추가
+- 최종 제출용 문서 정리
 
 ---
 
