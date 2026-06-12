@@ -306,7 +306,45 @@ football-bigdata-project/
 ├── results/
 └── report/
 ```
+# 실행 가이드
 
+### 1. SQLite → CSV 변환
+
+python src/ingest/sqlite_to_csv.py
+
+### 2. Hive 테이블 생성
+
+hive -f src/ingest/create_tables.sql
+
+### 3. 분석 테이블 생성
+
+hive -f src/ingest/create_analysis_stats.sql
+
+### 4. Feature 생성
+
+python src/pipeline/process.py
+
+python src/pipeline/create_ml_features.py
+
+python src/pipeline/create_winrate_features.py
+
+### 5. 통계 분석
+
+python src/analyze/data_analyze.py
+
+python src/analyze/correlation_analysis.py
+
+python src/analyze/average_comparison.py
+
+### 6. 머신러닝
+
+python src/analyze/logistic_regression.py
+
+python src/analyze/random_forest.py
+
+### 7. 시각화
+
+python src/analyze/visualization.py
 ---
 
 # 👨‍💻 개발자
